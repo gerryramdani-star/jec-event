@@ -1,0 +1,371 @@
+<!-- ========================================== -->
+<!-- 1. TAILWIND CONFIG & CUSTOM CSS UTILITY    -->
+<!-- (Wajib ada di elemen paling atas halaman)  -->
+<!-- ========================================== -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    jecblue: '#1b155e',
+                    jecgreen: '#78eb73',
+                    jecwhite: '#ffffff',
+                },
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                }
+            }
+        }
+    }
+</script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+    /* Override body bawaan tema WordPress */
+    body {
+        background-color: #1b155e !important;
+        color: #ffffff !important;
+        font-family: 'Inter', sans-serif !important;
+        -webkit-font-smoothing: antialiased;
+    }
+    
+    ::selection {
+        background-color: #78eb73;
+        color: #1b155e;
+    }
+
+    /* Custom Glassmorphism utility */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .glow-green {
+        box-shadow: 0 0 20px rgba(120, 235, 115, 0.3);
+    }
+    
+    /* Memastikan smooth scroll untuk anchor link di Elementor */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* ========================================== */
+    /* Expand Ring Animation (Transisi Micro)     */
+    /* ========================================== */
+    @keyframes expandRing {
+        0% { transform: scale(1); opacity: 0.8; }
+        100% { transform: scale(1.15); opacity: 0; }
+    }
+    
+    .btn-with-ring {
+        position: relative;
+    }
+    
+    .btn-with-ring::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 9999px; /* full rounded */
+        pointer-events: none;
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    /* Warna ring untuk tombol Daftar (Hijau) */
+    .btn-primary-ring::after {
+        border: 2px solid #78eb73;
+    }
+
+    /* Warna ring untuk tombol Pelajari (Putih/Glass) */
+    .btn-secondary-ring::after {
+        border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    /* Memicu animasi saat di-hover */
+    .btn-with-ring:hover::after {
+        animation: expandRing 0.6s ease-out forwards;
+    }
+
+    /* ========================================== */
+    /* CSS Card Time Machine / Speaker Stack      */
+    /* ========================================== */
+    .speaker-card {
+        transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s ease;
+        transform-origin: center center;
+        will-change: transform, opacity;
+    }
+    
+    .timeline-line {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s;
+        transform-origin: right center;
+    }
+    
+    .timeline-text {
+        transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+    }
+</style>
+
+<!-- ========================================== -->
+<!-- 2. NAVBAR SECTION                          -->
+<!-- ========================================== -->
+<nav class="fixed w-full z-50 glass-card border-b-0 border-white/10 transition-all duration-300 left-0 top-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <div class="flex-shrink-0 flex items-center gap-2">
+                <span class="text-3xl font-extrabold tracking-tight text-white">JEC<span class="text-jecgreen">.</span></span>
+                <span class="text-sm font-light leading-tight hidden sm:block border-l border-white/20 pl-2 text-white">Jakarta<br>Entrepreneur<br>Conference</span>
+            </div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-sm font-medium text-white hover:text-jecgreen transition-colors">Why JEC?</a>
+                <a href="#ecosystem" class="text-sm font-medium text-white hover:text-jecgreen transition-colors">Ecosystem</a>
+                <a href="#speakers" class="text-sm font-medium text-white hover:text-jecgreen transition-colors">Speakers</a>
+                <a href="#agenda" class="text-sm font-medium text-white hover:text-jecgreen transition-colors">Agenda</a>
+                <a href="#pricing" class="bg-jecgreen text-jecblue px-6 py-2.5 rounded-full font-bold hover:bg-white transition-all glow-green">Join 2026</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ========================================== -->
+<!-- 3. HERO SECTION DENGAN CARD STACK          -->
+<!-- ========================================== -->
+<section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-gradient-to-br from-jecblue via-jecblue to-[#2a386b] min-h-screen flex items-center">
+    <!-- Decorative Background Gradient Element -->
+    <div class="absolute top-0 right-0 -mr-48 -mt-48 w-[600px] h-[600px] bg-jecgreen rounded-full mix-blend-screen filter blur-[120px] opacity-20 pointer-events-none"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            
+            <!-- Kolom Kiri: Teks & Tombol (Text Left Aligned) -->
+            <div class="text-left">
+                <p class="text-jecgreen font-semibold tracking-widest uppercase mb-4">Building Indonesia's Most Connected Growth Platform</p>
+                <h1 class="text-5xl md:text-6xl xl:text-7xl font-extrabold tracking-tight mb-6 leading-tight text-white">
+                    Beyond Border, <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-jecwhite to-jecgreen">Let's Go Together.</span>
+                </h1>
+                <p class="mt-4 max-w-xl text-lg text-gray-300 font-light mb-8">
+                    Evolusi dari Pesta Wirausaha Jakarta. Menghadirkan pengalaman konferensi bisnis bertaraf internasional melalui kolaborasi TDA Indonesia, TDA Jakarta, dan KADIN Korea.
+                </p>
+
+                <!-- Event Date & Location Info -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10 text-md glass-card inline-flex px-6 py-3 rounded-2xl sm:rounded-full border-white/20 text-white">
+                    <div class="flex items-center gap-3"><i class="fa-regular fa-calendar text-jecgreen"></i> <span class="font-medium whitespace-nowrap">12-14 Nov 2026</span></div>
+                    <div class="hidden sm:block w-1 h-1 rounded-full bg-jecgreen/50"></div>
+                    <div class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-jecgreen"></i> <span class="font-medium whitespace-nowrap">JCC, Jakarta</span></div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#pricing" class="group btn-with-ring btn-primary-ring bg-jecgreen text-jecblue px-8 py-3.5 rounded-full font-bold text-lg hover:scale-[1.02] active:scale-[0.96] transition-transform duration-300 glow-green shadow-lg shadow-jecgreen/20 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-ticket transition-transform duration-300 group-hover:scale-110"></i>
+                        <span>Daftar Sekarang</span>
+                    </a>
+                    <a href="#about" class="group btn-with-ring btn-secondary-ring glass-card text-white px-8 py-3.5 rounded-full font-bold text-lg hover:bg-white/10 hover:scale-[1.02] active:scale-[0.96] transition-all duration-300 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-arrow-right transition-transform duration-300 group-hover:scale-110"></i>
+                        <span>Pelajari JEC</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kolom Kanan: Card Cover Flow Carousel (Speaker) -->
+            <div class="relative w-full h-[450px] lg:h-[500px] flex flex-col items-center justify-center" id="carousel-wrapper">
+                
+                <!-- Area Cover Flow 3D -->
+                <div class="w-full flex justify-center items-center relative h-[350px] pointer-events-none" style="perspective: 1000px; transform-style: preserve-3d;">
+                    
+                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(120,235,115,0.05),transparent_60%)] pointer-events-none"></div>
+
+                    <!-- Area Cards -->
+                    <div id="carousel-cards-container" class="relative w-full h-full flex items-center justify-center pointer-events-auto">
+                        <!-- Card 1 -->
+                        <div class="speaker-card absolute rounded-2xl flex w-[210px] aspect-[3/4] flex-col overflow-hidden shadow-2xl cursor-pointer border border-white/10 bg-jecblue">
+                            <img src="https://placehold.co/300x400/1b155e/78eb73?text=Budi+Santoso" alt="Speaker" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-4 pb-5 opacity-0 card-title-overlay transition-opacity duration-300">
+                                <h3 class="text-white font-bold text-lg leading-tight">Budi Santoso</h3>
+                                <p class="text-jecgreen text-xs font-medium">Presiden TDA 9.0</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="speaker-card absolute rounded-2xl flex w-[210px] aspect-[3/4] flex-col overflow-hidden shadow-2xl cursor-pointer border border-white/10 bg-jecblue">
+                            <img src="https://placehold.co/300x400/2a386b/ffffff?text=Kim+Min+Soo" alt="Speaker" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-4 pb-5 opacity-0 card-title-overlay transition-opacity duration-300">
+                                <h3 class="text-white font-bold text-lg leading-tight">Kim Min Soo</h3>
+                                <p class="text-jecgreen text-xs font-medium">Direktur KADIN Korea</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="speaker-card absolute rounded-2xl flex w-[210px] aspect-[3/4] flex-col overflow-hidden shadow-2xl cursor-pointer border border-white/10 bg-jecblue">
+                            <img src="https://placehold.co/300x400/1b155e/78eb73?text=Sarah+Widjaja" alt="Speaker" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-4 pb-5 opacity-0 card-title-overlay transition-opacity duration-300">
+                                <h3 class="text-white font-bold text-lg leading-tight">Sarah Widjaja</h3>
+                                <p class="text-jecgreen text-xs font-medium">CEO Tech Innovator</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="speaker-card absolute rounded-2xl flex w-[210px] aspect-[3/4] flex-col overflow-hidden shadow-2xl cursor-pointer border border-white/10 bg-jecblue">
+                            <img src="https://placehold.co/300x400/2a386b/ffffff?text=Arief+Rahman" alt="Speaker" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-4 pb-5 opacity-0 card-title-overlay transition-opacity duration-300">
+                                <h3 class="text-white font-bold text-lg leading-tight">Arief Rahman</h3>
+                                <p class="text-jecgreen text-xs font-medium">Global Investor</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 5 -->
+                        <div class="speaker-card absolute rounded-2xl flex w-[210px] aspect-[3/4] flex-col overflow-hidden shadow-2xl cursor-pointer border border-white/10 bg-jecblue">
+                            <img src="https://placehold.co/300x400/1b155e/78eb73?text=Anita+Feng" alt="Speaker" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-4 pb-5 opacity-0 card-title-overlay transition-opacity duration-300">
+                                <h3 class="text-white font-bold text-lg leading-tight">Anita Feng</h3>
+                                <p class="text-jecgreen text-xs font-medium">Srikandi Bisnis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kontrol Navigasi (Pill) -->
+                <div class="mt-4 w-fit px-2 py-1.5 flex items-center gap-4 justify-center text-gray-300 rounded-full glass-card shadow-lg z-20 pointer-events-auto">
+                    <button id="btn-prev" class="w-8 h-8 flex items-center justify-center cursor-pointer hover:bg-white/10 rounded-full transition-colors border-0 bg-transparent text-gray-300 hover:text-white">
+                        <i class="fa-solid fa-chevron-left text-sm"></i>
+                    </button>
+                    
+                    <!-- Indikator Dots digenerate via JS -->
+                    <div id="carousel-dots" class="flex justify-center items-center gap-1.5"></div>
+                    
+                    <button id="btn-next" class="w-8 h-8 flex items-center justify-center cursor-pointer hover:bg-white/10 rounded-full transition-colors border-0 bg-transparent text-gray-300 hover:text-white">
+                        <i class="fa-solid fa-chevron-right text-sm"></i>
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Script Logika Card Cover Flow Native JS -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.speaker-card');
+        const dotsContainer = document.getElementById('carousel-dots');
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const wrapper = document.getElementById('carousel-wrapper');
+        
+        const totalCards = cards.length;
+        let activeIndex = 2; // Default aktif di tengah
+        let autoplayInterval;
+
+        // 1. Inisialisasi Dots (Indikator Titik)
+        cards.forEach((_, i) => {
+            const dot = document.createElement('div');
+            dot.className = 'rounded-full cursor-pointer h-1.5 transition-all duration-300';
+            dot.dataset.index = i;
+            dot.addEventListener('click', (e) => {
+                e.stopPropagation();
+                goToSlide(i);
+                resetAutoplay();
+            });
+            dotsContainer.appendChild(dot);
+
+            // Tambahkan klik event pada setiap card
+            cards[i].addEventListener('click', (e) => {
+                e.stopPropagation();
+                goToSlide(i);
+                resetAutoplay();
+            });
+        });
+
+        const dots = dotsContainer.querySelectorAll('div');
+
+        // 2. Fungsi Update Transform 3D (Cover Flow)
+        function updateCarousel() {
+            cards.forEach((card, i) => {
+                const isActive = activeIndex === i;
+                const offset = i - activeIndex;
+                const absOffset = Math.abs(offset);
+                const isPast = i < activeIndex;
+
+                // Logika Fisika Rotasi & Posisi (Mengacu dari Framer Motion)
+                let x = offset * 45; // Geser X lebih lebar karena kartunya besar
+                let rotateY = isActive ? 0 : (isPast ? 38 : -38);
+                let z = isActive ? 60 : -absOffset * 60;
+                let scale = isActive ? 1.1 : 1 - (absOffset * 0.08);
+                let opacity = absOffset > 2 ? 0 : 1 - (absOffset * 0.25);
+                let zIndex = 100 - absOffset;
+
+                // Terapkan ke style inline
+                card.style.transform = `translate3d(${x}px, 0px, ${z}px) rotateY(${rotateY}deg) scale(${scale})`;
+                card.style.opacity = Math.max(0, opacity);
+                card.style.zIndex = zIndex;
+                
+                // Efek grayscale dan overlay judul untuk kartu yang tidak aktif
+                const img = card.querySelector('img');
+                const overlay = card.querySelector('.card-title-overlay');
+                
+                if (isActive) {
+                    img.style.filter = 'grayscale(0%) brightness(100%)';
+                    overlay.style.opacity = '1';
+                } else {
+                    img.style.filter = 'grayscale(80%) brightness(60%)';
+                    overlay.style.opacity = '0';
+                }
+            });
+
+            // Update status titik (dots)
+            dots.forEach((dot, i) => {
+                if (i === activeIndex) {
+                    dot.className = 'rounded-full cursor-pointer h-1.5 transition-all duration-300 w-6 bg-[#78eb73]'; // Warna titik aktif (Hijau JEC)
+                } else {
+                    dot.className = 'rounded-full cursor-pointer h-1.5 transition-all duration-300 w-1.5 bg-white/30 hover:bg-white/60';
+                }
+            });
+        }
+
+        // 3. Fungsi Navigasi
+        function goToSlide(index) {
+            activeIndex = index;
+            updateCarousel();
+        }
+
+        function toNext() {
+            activeIndex = (activeIndex + 1) % totalCards;
+            updateCarousel();
+        }
+
+        function toPrev() {
+            activeIndex = (activeIndex - 1 + totalCards) % totalCards;
+            updateCarousel();
+        }
+
+        // Event Listener Tombol Navigasi
+        btnNext.addEventListener('click', (e) => { e.stopPropagation(); toNext(); resetAutoplay(); });
+        btnPrev.addEventListener('click', (e) => { e.stopPropagation(); toPrev(); resetAutoplay(); });
+
+        // 4. Autoplay (Otomatis geser ke kanan)
+        function startAutoplay() {
+            autoplayInterval = setInterval(toNext, 3000); // Tiap 3 detik
+        }
+
+        function stopAutoplay() {
+            clearInterval(autoplayInterval);
+        }
+
+        function resetAutoplay() {
+            stopAutoplay();
+            startAutoplay();
+        }
+
+        // Hentikan autoplay saat disorot mouse (hover)
+        wrapper.addEventListener('mouseenter', stopAutoplay);
+        wrapper.addEventListener('mouseleave', startAutoplay);
+
+        // Inisialisasi Pertama
+        updateCarousel();
+        startAutoplay();
+    });
+</script>
